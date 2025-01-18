@@ -3,7 +3,7 @@ const chalk = require('chalk')
 
 class WatchThen {
   apply(compiler) {
-    compiler.hooks.done.tap('WatchThen', stats => {
+    compiler.hooks.done.tap('WatchThen', (stats) => {
       console.log(chalk.green.underline('webpack build is done'))
     })
   }
@@ -20,7 +20,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    // host: 'localhost.xxx.com',
+    // host: '0.0.0.0',
     port: 8080,
     // allowedHosts: 'all',
     compress: true,

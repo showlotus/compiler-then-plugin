@@ -1,0 +1,12 @@
+{
+  "name": "plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "serve": "webpack serve --mode development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
