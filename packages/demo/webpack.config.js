@@ -16,6 +16,7 @@ module.exports = {
     headers: {
       'Access-Control-Allow-Origin': '*', // 允许所有资源访问
     },
+    open: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
