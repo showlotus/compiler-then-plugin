@@ -1,13 +1,5 @@
 const path = require('path')
-const chalk = require('chalk')
-
-class WatchThen {
-  apply(compiler) {
-    compiler.hooks.done.tap('WatchThen', (stats) => {
-      console.log(chalk.green.underline('webpack build is done'))
-    })
-  }
-}
+const WatchThen = require('./watchThen')
 
 module.exports = {
   entry: './src/index.js',
