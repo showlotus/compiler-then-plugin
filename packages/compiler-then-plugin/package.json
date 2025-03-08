@@ -1,0 +1,22 @@
+{
+  "name": "compiler-then-plugin",
+  "version": "0.0.1",
+  "description": "After each compilation, execute the custom script",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "Webpack",
+    "plugin"
+  ],
+  "author": "showlotus",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/ws": "^8.18.0",
+    "ws": "^8.18.1"
+  }
+}

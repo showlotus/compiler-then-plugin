@@ -1,6 +1,11 @@
+import { sum } from './utils'
+
 function render() {
   const div = document.createElement('div')
-  div.innerHTML = /* html */ `<button>demo</button>`
+  div.innerHTML = /* html */ `<button>demo - ${sum(
+    Math.random(),
+    Math.random()
+  )}</button>`
   document.body.appendChild(div)
 }
 

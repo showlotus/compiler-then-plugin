@@ -1,5 +1,5 @@
 const path = require('path')
-const CompilerThenPlugin = require('./CompilerThenPlugin')
+const CompilerThenPlugin = require('compiler-then-plugin')
 
 module.exports = {
   mode: 'development',

@@ -1,13 +1,17 @@
 {
-  "name": "plugin",
+  "name": "mock-resource",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
     "serve": "webpack serve --mode development",
-    "build": "webpack --mode development --watch"
+    "build": "webpack --mode development"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ws": "^8.18.1",
+    "compiler-then-plugin": "workspace:*"
+  }
 }

@@ -1,8 +1,27 @@
-const Net = require('net')
-const WebSocket = require('ws')
-const Webpack = require('webpack')
+import * as Net from 'net'
+import * as WebSocket from 'ws'
+import * as Webpack from 'webpack'
 
-function findAvailablePort(startPort) {
+interface CompilerThenPluginOptions {
+  /**
+   * Port number of the internal websocket service
+   *
+   * default port is `3872`
+   */
+  port?: number
+  /**
+   * Custom execute script, a JavaScript string
+   *
+   * default script is `location.reload()`
+   */
+  script?: string
+}
+
+interface WebSocketServer extends WebSocket.Server {
+  clients: Set<WebSocket>
+}
+
+function findAvailablePort(startPort: number): Promise<number> {
   return new Promise((resolve) => {
     const server = Net.createServer()
 
@@ -17,18 +36,23 @@ function findAvailablePort(startPort) {
 }
 
 class CompilerThenPlugin {
-  constructor(options) {
+  options: CompilerThenPluginOptions
+  wss: WebSocketServer = {} as WebSocketServer
+
+  constructor(options?: CompilerThenPluginOptions) {
     const defaultOptions = { port: 3872, script: 'location.reload()' }
     this.options = { ...defaultOptions, ...(options || {}) }
     this.initServer()
   }
 
   async initServer() {
-    this.options.port = await findAvailablePort(this.options.port)
-    this.wss = new WebSocket.Server({ port: this.options.port })
+    this.options.port = await findAvailablePort(this.options.port!)
+    this.wss = new WebSocket.Server({
+      port: this.options.port,
+    }) as WebSocketServer
   }
 
-  async apply(compiler) {
+  async apply(compiler: Webpack.Compiler) {
     if (
       !(
         process.env.NODE_ENV === 'development' ||
@@ -41,21 +65,22 @@ class CompilerThenPlugin {
 
     const BannerPlugin = new Webpack.BannerPlugin({
       banner: /* js */ `
-        (function () {
+        ;(function () {
           const ws = new WebSocket('ws://localhost:' + ${this.options.port});
 
           ws.addEventListener('open', function (event) {
             console.log('[${PluginName}] Server started!')
-          });
+          })
   
           ws.addEventListener('message', function (event) {
             if (event.data === 'recompile') {
               new Function(\`${this.options.script}\`)()
             }
-          });
+          })
         })();
       `,
       raw: true,
+      entryOnly: true,
     })
     BannerPlugin.apply(compiler)
 
@@ -67,4 +92,4 @@ class CompilerThenPlugin {
   }
 }
 
-module.exports = CompilerThenPlugin
+export = CompilerThenPlugin
