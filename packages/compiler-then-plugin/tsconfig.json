@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "CommonJS",
+    "target": "es2015",
+    "module": "commonjs",
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "dist",
     "declaration": true,
-    "sourceMap": true
-  },
-  "include": ["src/"],
-  "exclude": ["node_modules", "dist"]
+    "emitDeclarationOnly": false,
+    "declarationDir": "./types",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node"
+  }
 }
