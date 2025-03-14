@@ -1,6 +1,6 @@
 {
-  "name": "demo",
-  "version": "1.0.0",
+  "name": "webpack4",
+  "version": "0.1.0",
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "4.46",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.3"
+  }
 }

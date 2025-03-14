@@ -1,7 +1,6 @@
 function render() {
   const element = document.createElement('div')
-
-  element.innerHTML = ['Hello', 'webpack'].join(' ')
+  element.innerText = 'this is Mock Resource: ' + new Date().toLocaleString()
   return element
 }
 

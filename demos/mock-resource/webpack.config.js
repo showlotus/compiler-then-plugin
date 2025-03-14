@@ -14,7 +14,7 @@ module.exports = {
       directory: path.join(__dirname, 'dist'),
     },
     // host: '0.0.0.0',
-    port: 8080,
+    port: 3870,
     // allowedHosts: 'all',
     compress: true,
     hot: false,
