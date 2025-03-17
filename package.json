@@ -1,7 +1,8 @@
 {
   "name": "compiler-then-plugin-repo",
   "version": "0.0.1",
-  "description": "",
+  "packageManager": "pnpm@8.10.0",
+  "description": "After each compilation, execute the custom script",
   "main": "index.js",
   "scripts": {
     "serve": "npm-run-all --parallel webpack4 webpack5 mock-project",
