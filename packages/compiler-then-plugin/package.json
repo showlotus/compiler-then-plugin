@@ -5,18 +5,32 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "tsc && pnpm inject:cjs",
+    "watch": "tsc --watch",
+    "inject:cjs": "node ./scripts/inject-cjs-export.js"
   },
   "keywords": [
-    "Webpack",
+    "webpack",
     "plugin"
   ],
-  "author": "showlotus",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "author": "showlotus <showlotus2000@gmail.com>",
+  "homepage": "https://github.com/showlotus/compiler-then-plugin/tree/master/packages/compiler-then-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/showlotus/compiler-then-plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/showlotus/compiler-then-plugin/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.13.9",
     "@types/ws": "^8.18.0",
+    "webpack": "^5.98.0",
     "ws": "^8.18.1"
   }
 }

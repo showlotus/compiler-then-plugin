@@ -24,4 +24,4 @@ declare class CompilerThenPlugin {
     initServer(): Promise<void>;
     apply(compiler: Webpack.Compiler): void;
 }
-export = CompilerThenPlugin;
+export default CompilerThenPlugin;

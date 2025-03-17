@@ -1,23 +1,22 @@
 {
-  "name": "webpack-watch-then-tap",
+  "name": "compiler-then-plugin-repo",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "webpack serve --mode development",
-    "demo": "pnpm -F demo serve",
-    "plugin": "pnpm -F plugin serve",
-    "dev": "npm-run-all --parallel demo plugin"
+    "serve": "npm-run-all --parallel webpack4 webpack5 mock-project",
+    "webpack4": "pnpm -F ./demos/webpack4 serve",
+    "webpack5": "pnpm -F ./demos/webpack5 serve",
+    "mock-project": "pnpm -F ./demos/mock-project serve",
+    "build": "pnpm -F ./packages/compiler-then-plugin build",
+    "clear": "pnpm exec rimraf **/node_modules",
+    "postinstall": "pnpm build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "showlotus <showlotus2000@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
-    "chalk": "^4.1.2",
-    "html-webpack-plugin": "^5.6.3",
     "npm-run-all": "^4.1.5",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
+    "rimraf": "^6.0.1"
   }
 }

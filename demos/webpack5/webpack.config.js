@@ -1,5 +1,5 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CompilerThenPlugin = require('compiler-then-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -10,17 +10,19 @@ module.exports = {
     iife: true,
   },
   devServer: {
-    port: 9090,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    // host: '0.0.0.0',
+    port: 13870,
     // allowedHosts: 'all',
     compress: true,
+    hot: false,
+    liveReload: false,
     headers: {
       'Access-Control-Allow-Origin': '*', // 允许所有资源访问
     },
-    open: true,
+    // open: true,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-    }),
-  ],
+  plugins: [new CompilerThenPlugin()],
 }

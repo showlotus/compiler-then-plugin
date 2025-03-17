@@ -2,19 +2,17 @@ const path = require('path')
 const CompilerThenPlugin = require('compiler-then-plugin')
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.js',
+  mode: 'development',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    iife: true,
+    // iife: true,
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
+    contentBase: path.join(__dirname, 'dist'),
     // host: '0.0.0.0',
-    port: 3870,
+    port: 13871,
     // allowedHosts: 'all',
     compress: true,
     hot: false,
@@ -22,6 +20,7 @@ module.exports = {
     headers: {
       'Access-Control-Allow-Origin': '*', // 允许所有资源访问
     },
+    // open: true,
   },
   plugins: [new CompilerThenPlugin()],
 }

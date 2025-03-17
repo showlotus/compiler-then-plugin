@@ -52,7 +52,7 @@ class CompilerThenPlugin {
     }) as WebSocketServer
   }
 
-  async apply(compiler: Webpack.Compiler) {
+  apply(compiler: Webpack.Compiler) {
     if (
       !(
         process.env.NODE_ENV === 'development' ||
@@ -63,8 +63,8 @@ class CompilerThenPlugin {
 
     const PluginName = 'CompilerThenPlugin'
 
-    const BannerPlugin = new Webpack.BannerPlugin({
-      banner: /* js */ `
+    compiler.hooks.emit.tapAsync(PluginName, (compilation, callback) => {
+      const codeToInject = /* js */ `
         ;(function () {
           const ws = new WebSocket('ws://localhost:' + ${this.options.port});
 
@@ -78,18 +78,34 @@ class CompilerThenPlugin {
             }
           })
         })();
-      `,
-      raw: true,
-      entryOnly: true,
-    })
-    BannerPlugin.apply(compiler)
+      `
 
-    compiler.hooks.done.tap(PluginName, () => {
-      this.wss.clients.forEach((client) => {
-        client.send('recompile')
+      // Get the entry JS file
+      const entryFiles = new Set()
+
+      compilation.entrypoints.forEach((entry) => {
+        entry.getFiles().forEach((file) => {
+          if (file.endsWith('.js')) {
+            entryFiles.add(file)
+          }
+        })
       })
+
+      // Only the entry file is injected
+      for (const filename of entryFiles) {
+        if (compilation.assets[filename as string]) {
+          const originalSource = compilation.assets[filename as string].source()
+          const newSource = codeToInject + '\n' + originalSource
+          compilation.assets[filename as string] = {
+            source: () => newSource,
+            size: () => newSource.length,
+          } as any
+        }
+      }
+
+      callback()
     })
   }
 }
 
-export = CompilerThenPlugin
+export default CompilerThenPlugin

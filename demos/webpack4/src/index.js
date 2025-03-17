@@ -1,10 +1,10 @@
 function render() {
   const element = document.createElement('div')
-  element.innerText = 'Webpack5'
+  element.innerText = 'Webpack4'
   element.style = /* style */ `
     position: fixed;
     right: 16px;
-    top: 16px;
+    top: 72px;
     padding: 0 8px;
     height: 40px;
     display: flex;
