@@ -105,6 +105,12 @@ class CompilerThenPlugin {
 
       callback()
     })
+
+    compiler.hooks.done.tap(PluginName, () => {
+      this.wss.clients.forEach((client) => {
+        client.send('recompile')
+      })
+    })
   }
 }
 

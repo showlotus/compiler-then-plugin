@@ -1,6 +1,6 @@
 {
   "name": "compiler-then-plugin-repo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@8.10.0",
   "description": "After each compilation, execute the custom script",
   "main": "index.js",
