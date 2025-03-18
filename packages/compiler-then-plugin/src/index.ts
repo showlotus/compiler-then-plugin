@@ -42,7 +42,6 @@ class CompilerThenPlugin {
   constructor(options?: CompilerThenPluginOptions) {
     const defaultOptions = { port: 3872, script: 'location.reload()' }
     this.options = { ...defaultOptions, ...(options || {}) }
-    this.initServer()
   }
 
   async initServer() {
@@ -63,7 +62,8 @@ class CompilerThenPlugin {
 
     const PluginName = 'CompilerThenPlugin'
 
-    compiler.hooks.emit.tapAsync(PluginName, (compilation, callback) => {
+    compiler.hooks.emit.tapPromise(PluginName, async (compilation) => {
+      await this.initServer()
       const codeToInject = /* js */ `
         ;(function () {
           const ws = new WebSocket('ws://localhost:' + ${this.options.port});
@@ -103,7 +103,7 @@ class CompilerThenPlugin {
         }
       }
 
-      callback()
+      return Promise.resolve()
     })
 
     compiler.hooks.done.tap(PluginName, () => {
