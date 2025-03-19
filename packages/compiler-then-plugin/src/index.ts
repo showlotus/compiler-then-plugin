@@ -60,10 +60,11 @@ class CompilerThenPlugin {
     )
       return
 
+    this.initServer()
+
     const PluginName = 'CompilerThenPlugin'
 
     compiler.hooks.emit.tapPromise(PluginName, async (compilation) => {
-      await this.initServer()
       const codeToInject = /* js */ `
         ;(function () {
           const ws = new WebSocket('ws://localhost:' + ${this.options.port});

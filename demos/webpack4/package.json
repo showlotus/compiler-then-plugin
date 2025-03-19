@@ -4,8 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "serve": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --mode=development",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode=development"
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && webpack-dev-server --mode=development",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=development"
   },
   "keywords": [],
   "author": "",

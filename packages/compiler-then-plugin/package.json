@@ -1,6 +1,6 @@
 {
   "name": "compiler-then-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "After each compilation, execute the custom script",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
